@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+{# {% include "partiel/title_section.html.twig",  %}
+{{  include("partiel/title_section.html.twig", {'name':'Register'} ) }} #}
+<div class="breadcrumb_section bg_gray page-title-mini">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="page-title">
+                    <h1>Inscription</h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ol class="breadcrumb justify-content-md-end">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active">Inscription</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="login_register_wrap section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-10">
+                <div class="login_wrap">
+            		<div class="padding_eight_all bg-white">
+                        <div class="heading_s1">
+                            <h3> Créez Votre Compte </h3>
+                        </div>
+                        <div class="message-flash">
+                            {% for flash_error in app.flashes('verify_email_error') %}
+                                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+                            {% endfor %}
+                        </div>
+                        {{ form_start(registrationForm) }}
+                            <div class="form-group">
+                                {{ form_row(registrationForm.Username) }}
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">{{ form_row(registrationForm.prenom) }}</div>
+                                <div class="col-md-6">{{ form_row(registrationForm.nom) }}</div>
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.email) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_row(registrationForm.plainPassword) }}
+                            </div>
+                            <div class="form-group">    
+                                {{ form_row(registrationForm.agreeTerms) }} 
+                                <a href="{{ path('cg_conditions')}}" target="_blank">Lires les conditions</a>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-fill-out btn-block" name="register">Inscription</button>
+                            </div>
+                        {{ form_end(registrationForm) }}
+                        <div class="different_login">
+                            <span> or</span>
+                        </div>
+                        <ul class="btn-login list_none text-center">
+                            <li><a href="#" class="btn btn-facebook"><i class="ion-social-facebook"></i>Facebook</a></li>
+                            <li><a href="#" class="btn btn-google"><i class="ion-social-googleplus"></i>Google</a></li>
+                        </ul>
+                        <div class="form-note text-center">Already have an account? <a href="{{ path('app_login')}}">Login</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   
+{% endblock %}
