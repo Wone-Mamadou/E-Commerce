@@ -32,7 +32,9 @@ class AddressController extends AbstractController
             $user = $this->getUser();
             $address->setUser($user);
             $addressRepository->add($address);
-            return $this->redirectToRoute('app_address_index', [], Response::HTTP_SEE_OTHER);
+
+            $this->addFlash('address_message', 'Votre adresse a été enregistrée');
+            return $this->redirectToRoute('app_mon_compte', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('address/new.html.twig', [
@@ -41,13 +43,13 @@ class AddressController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_address_show', methods: ['GET'])]
-    public function show(Address $address): Response
-    {
-        return $this->render('address/show.html.twig', [
-            'address' => $address,
-        ]);
-    }
+    // #[Route('/{id}', name: 'app_address_show', methods: ['GET'])]
+    // public function show(Address $address): Response
+    // {
+    //     return $this->render('address/show.html.twig', [
+    //         'address' => $address,
+    //     ]);
+    // }
 
     #[Route('/{id}/edit', name: 'app_address_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Address $address, AddressRepository $addressRepository): Response
@@ -57,7 +59,8 @@ class AddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $addressRepository->add($address);
-            return $this->redirectToRoute('app_address_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('address_message', 'Votre adresse a été modifier');
+            return $this->redirectToRoute('app_mon_compte', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('address/edit.html.twig', [
@@ -71,8 +74,9 @@ class AddressController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$address->getId(), $request->request->get('_token'))) {
             $addressRepository->remove($address);
+            $this->addFlash('address_message', 'Votre adresse a été Supprimer');
         }
 
-        return $this->redirectToRoute('app_address_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_mon_compte', [], Response::HTTP_SEE_OTHER);
     }
 }

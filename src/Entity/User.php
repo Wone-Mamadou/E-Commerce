@@ -43,9 +43,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Address::class)]
     private $addresses;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: AvisProduit::class)]
+    private $avisProduits;
+
     public function __construct()
     {
         $this->addresses = new ArrayCollection();
+        $this->avisProduits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -199,5 +203,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return strval($this->id);
+    }
+
+    /**
+     * @return Collection<int, AvisProduit>
+     */
+    public function getAvisProduits(): Collection
+    {
+        return $this->avisProduits;
+    }
+
+    public function addAvisProduit(AvisProduit $avisProduit): self
+    {
+        if (!$this->avisProduits->contains($avisProduit)) {
+            $this->avisProduits[] = $avisProduit;
+            $avisProduit->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvisProduit(AvisProduit $avisProduit): self
+    {
+        if ($this->avisProduits->removeElement($avisProduit)) {
+            // set the owning side to null (unless already changed)
+            if ($avisProduit->getUser() === $this) {
+                $avisProduit->setUser(null);
+            }
+        }
+
+        return $this;
     }
 }
