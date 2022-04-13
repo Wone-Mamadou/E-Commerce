@@ -23,7 +23,7 @@ class AvisProduit
     #[ORM\JoinColumn(nullable: false)]
     private $user;
 
-    #[ORM\ManyToOne(targetEntity: produit::class, inversedBy: 'avisProduits')]
+    #[ORM\ManyToOne(targetEntity: Produit::class, inversedBy: 'avisProduits')]
     #[ORM\JoinColumn(nullable: false)]
     private $produit;
 

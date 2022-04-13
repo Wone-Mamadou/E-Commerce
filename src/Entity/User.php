@@ -40,10 +40,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Address::class)]
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: Address::class)]
     private $addresses;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: AvisProduit::class)]
+    #[ORM\OneToMany(mappedBy: 'User', targetEntity: AvisProduit::class)]
     private $avisProduits;
 
     public function __construct()
