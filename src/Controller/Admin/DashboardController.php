@@ -16,8 +16,8 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        return parent::index();
-
+        //return parent::index();
+        // return $this->render('admin/index.html.twig');
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
@@ -45,6 +45,6 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Produit', 'fa fa-shopping-cart', Produit::class);
-        yield MenuItem::linkToCrud('Catégorie', 'fa fa-shopping-cart', Categories::class);
+        yield MenuItem::linkToCrud('Catégorie', 'fa fa-list', Categories::class);
     }
 }

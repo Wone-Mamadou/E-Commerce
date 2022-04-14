@@ -22,7 +22,7 @@ class Produit
     private $description;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $infoComplémentaire;
+    private $infoComplementaire;
 
     #[ORM\Column(type: 'float')]
     private $prix;
@@ -37,7 +37,7 @@ class Produit
     private $isFeaturead = false;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
-    private $offreSpéciale = false;
+    private $offreSpeciale = false;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
@@ -91,14 +91,14 @@ class Produit
         return $this;
     }
 
-    public function getInfoComplémentaire(): ?string
+    public function getInfoComplementaire(): ?string
     {
-        return $this->infoComplémentaire;
+        return $this->infoComplementaire;
     }
 
-    public function setInfoComplémentaire(?string $infoComplémentaire): self
+    public function setInfoComplementaire(?string $infoComplementaire): self
     {
-        $this->infoComplémentaire = $infoComplémentaire;
+        $this->infoComplementaire = $infoComplementaire;
 
         return $this;
     }
@@ -151,14 +151,14 @@ class Produit
         return $this;
     }
 
-    public function getOffreSpéciale(): ?bool
+    public function getOffreSpeciale(): ?bool
     {
-        return $this->offreSpéciale;
+        return $this->offreSpeciale;
     }
 
-    public function setOffreSpéciale(?bool $offreSpéciale): self
+    public function setOffreSpeciale(?bool $offreSpeciale): self
     {
-        $this->offreSpéciale = $offreSpéciale;
+        $this->offreSpeciale = $offreSpeciale;
 
         return $this;
     }

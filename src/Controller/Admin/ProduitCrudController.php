@@ -26,13 +26,16 @@ class ProduitCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('nom'),
             TextEditorField::new('description'),
-            TextEditorField::new('infoComplémentaire'),
+            TextEditorField::new('infoComplementaire'),
             Moneyfield::new('prix')->setCurrency('USD'),
             BooleanField::new('meileureVente'),
             BooleanField::new('nouvelleArrivage'),
-            BooleanField::new('offreSpéciale'),
+            BooleanField::new('isFeaturead'),
+            BooleanField::new('offreSpeciale'),
             AssociationField::new('categories'),
             ImageField::new('image')->setBasePath('assets/upload/produits/')
+                                    ->setUploadDir('public/assets/upload/produits/')
+                                    ->setRequired(false),
         ];
     }
 }
