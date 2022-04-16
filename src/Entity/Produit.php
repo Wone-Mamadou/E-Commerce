@@ -45,8 +45,7 @@ class Produit
     #[ORM\ManyToMany(targetEntity: Categories::class, inversedBy: 'produits')]
     private $categories;
 
-    #[ORM\ManyToMany(targetEntity: TagsProduit::class, mappedBy: 'produit')]
-    private $tagsProduits;
+   
 
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: ProduitEnRelation::class)]
     private $produitEnRelations;
@@ -54,12 +53,24 @@ class Produit
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: AvisProduit::class)]
     private $avisProduits;
 
+    #[ORM\Column(type: 'integer')]
+    private $quantite;
+
+    #[ORM\Column(type: 'datetime')]
+    private $dateCreation;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $tags;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $slug;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
-        $this->tagsProduits = new ArrayCollection();
         $this->produitEnRelations = new ArrayCollection();
         $this->avisProduits = new ArrayCollection();
+        $this->dateCreation = new \DateTime();
     }
 
     public function getId(): ?int
@@ -199,32 +210,7 @@ class Produit
         return $this;
     }
 
-    /**
-     * @return Collection<int, TagsProduit>
-     */
-    public function getTagsProduits(): Collection
-    {
-        return $this->tagsProduits;
-    }
-
-    public function addTagsProduit(TagsProduit $tagsProduit): self
-    {
-        if (!$this->tagsProduits->contains($tagsProduit)) {
-            $this->tagsProduits[] = $tagsProduit;
-            $tagsProduit->addProduit($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTagsProduit(TagsProduit $tagsProduit): self
-    {
-        if ($this->tagsProduits->removeElement($tagsProduit)) {
-            $tagsProduit->removeProduit($this);
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, ProduitEnRelation>
@@ -282,6 +268,54 @@ class Produit
                 $avisProduit->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->dateCreation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $dateCreation): self
+    {
+        $this->dateCreation = $dateCreation;
+
+        return $this;
+    }
+
+    public function getTags(): ?string
+    {
+        return $this->tags;
+    }
+
+    public function setTags(?string $tags): self
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

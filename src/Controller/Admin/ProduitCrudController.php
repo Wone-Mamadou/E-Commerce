@@ -11,6 +11,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\Moneyfield;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class ProduitCrudController extends AbstractCrudController
 {
@@ -25,12 +27,15 @@ class ProduitCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(),
             TextField::new('nom'),
+            SlugField::new('slug')->setTargetFieldName('nom')->hideOnIndex(),
             TextEditorField::new('description'),
-            TextEditorField::new('infoComplementaire'),
+            TextEditorField::new('infoComplementaire')->hideOnIndex(),
             Moneyfield::new('prix')->setCurrency('USD'),
+            IntegerField::new('quantite'),
+            TextField::new('tags'),
             BooleanField::new('meileureVente'),
             BooleanField::new('nouvelleArrivage'),
-            BooleanField::new('isFeaturead'),
+            BooleanField::new('isFeaturead', 'Featured'),
             BooleanField::new('offreSpeciale'),
             AssociationField::new('categories'),
             ImageField::new('image')->setBasePath('assets/upload/produits/')
