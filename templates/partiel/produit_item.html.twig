@@ -1,13 +1,13 @@
-<div class="col-lg-3 col-md-4 col-6">
+<div class="item">
     <div class="product">
         <div class="product_img">
             <a href="">
-                <img height="300" src="/assets/upload/produits/{{produit.image}}" alt="product_img1">
+                <img src="/assets/upload/produits/{{produit.image}}" alt="{{produit.nom}}">
             </a>
             <div class="product_action_box">
                 <ul class="list_none pr_action_btn">
                     <li class="add-to-cart"><a href="#"><i class="icon-basket-loaded"></i> Add To Cart</a></li>
-                    <li><a href="" class=""><i class="icon-shuffle"></i></a></li>
+                    <li><a href=""><i class="icon-shuffle"></i></a></li>
                     <li><a href="{{ path('produit_details', {'slug': produit.slug} ) }}" class=""><i class="icon-magnifier-add"></i></a></li>
                     <li><a href="#"><i class="icon-heart"></i></a></li>
                 </ul>
@@ -26,12 +26,12 @@
                 <div class="rating">
                     <div class="product_rate" style="width:80%"></div>
                 </div>
-                <span class="rating_num">{{produit.avisProduits | length}}</span>
+                <span class="rating_num">(21)</span>
             </div>
             <div class="pr_desc">
-                <p>{{produit.description}}</p>
+                <p>{{produit.description | raw }}</p>
             </div>
-            
+
         </div>
     </div>
 </div>
