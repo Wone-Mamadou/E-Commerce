@@ -36,6 +36,7 @@
                            <ul class="header_list">
                             <li><a href=""><i class="ti-control-shuffle"></i><span>Compare</span></a></li>
                             <li><a href=""><i class="ti-heart"></i><span>Wishlist</span></a></li>
+                            <li> <a href="{{ path('admin') }}"><i class="fas fa-cogs"></i> Administration</a></li>
                             {% if app.user %}
                                 <li><a href="{{path('app_logout')}}"><i class="ti-user"></i><span>Deconnexion</span></a></li>
                             {% else %}
