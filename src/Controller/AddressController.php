@@ -43,13 +43,13 @@ class AddressController extends AbstractController
         ]);
     }
 
-    // #[Route('/{id}', name: 'app_address_show', methods: ['GET'])]
-    // public function show(Address $address): Response
-    // {
-    //     return $this->render('address/show.html.twig', [
-    //         'address' => $address,
-    //     ]);
-    // }
+    #[Route('/{id}', name: 'app_address_show', methods: ['GET'])]
+    public function show(Address $address): Response
+    {
+        return $this->render('address/show.html.twig', [
+            'address' => $address,
+        ]);
+    }
 
     #[Route('/{id}/edit', name: 'app_address_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Address $address, AddressRepository $addressRepository): Response
